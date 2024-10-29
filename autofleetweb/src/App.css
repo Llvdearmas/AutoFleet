@@ -44,3 +44,8 @@
   /* background-color: #FCFAF4; */
   font-family: 'Poppins', sans-serif, 'League Spartan';
 }
+
+.web-container{
+  display: flex;
+  flex-direction: row;
+}
