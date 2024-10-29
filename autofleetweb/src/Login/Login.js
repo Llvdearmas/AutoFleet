@@ -6,9 +6,58 @@ import { useNavigate } from 'react-router-dom'; // Import Redirect from React Ro
 //Bootstrap
 import { Form, Button, Alert, Modal, Container } from 'react-bootstrap';
 import logo from './../img/logo.png';
-
+import { useAuth } from "../settings/AuthContext";
 
 const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [role, setRole] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+    const { login } = useAuth();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError('');
+
+        try {
+            const response = await fetch('https://localhost:7192/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password, role }),
+            });
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    // Handle unauthorized status
+                    setError('Invalid credentials.'); // Specific message for invalid login
+                } else {
+                    // For other types of errors, try to get the error message from response
+                    const errorData = await response.json();
+                    setError(errorData.Message || 'An error occurred. Please try again.');
+                }
+                return;
+            }
+
+            const data = await response.json();
+            console.log('Login successful:', data);
+
+            // Check the role and navigate accordingly
+            if (data.role === 'admin') {
+                login({ email: data.Email, role: data.Role }); // Save user data in context
+                navigate('/dashboard'); // Navigate to dashboard for admin
+            } else {
+                setError('You do not have access to this application.'); // Set error for non-admin roles
+            }
+            
+
+        } catch (error) {
+            setError('An error occurred. Please try again.'); // Handle network errors
+        }
+    }
+
     return(
         <div className="login">
             <div className="row align-items-center justify-content-center min-vh-100">
@@ -25,15 +74,31 @@ const Login = () => {
                 <div className="right-side bg-white col-md-4 p-5 rounded shadow">
                     <h2 className="text-center mb-4">LOGIN</h2>
 
-                    <form>
+                    {error && <Alert variant="danger">{error}</Alert>} 
+
+                    <form onSubmit={handleSubmit}>
                         <div className="form-group email-form mb-3">
                             <label>Email</label>
-                            <input type="email" className="form-control" id="email" placeholder="Enter email" />
+                            <input 
+                                type="email" 
+                                className="form-control" 
+                                id="email" 
+                                placeholder="Enter email" 
+                                value={email} 
+                                onChange={(e) => setEmail(e.target.value)} 
+                            />
                         </div>
 
                         <div className="form-group pass-form mb-3">
                             <label htmlFor="password">Password</label>
-                            <input type="password" className="form-control" id="password" placeholder="Password" />
+                            <input 
+                                type="password" 
+                                className="form-control" 
+                                id="password" 
+                                placeholder="Password"
+                                value={password} 
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
                         </div>
 
                         <div className="forgot-pass text-center">
