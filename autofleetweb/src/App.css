@@ -48,4 +48,5 @@
 .web-container{
   display: flex;
   flex-direction: row;
+  min-height: 100vh;
 }
