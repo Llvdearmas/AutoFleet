@@ -1,0 +1,76 @@
+
+.sidebar{
+    display: flex;
+    height: 100vh;
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0; /* Keeps the sidebar stuck at the top when you scroll down */
+    z-index: 100; /* Ensures it's on top of other content if necessary */
+}
+
+.custom-sidebar {
+    background-color: #012A4A !important;
+    box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.05) !important;
+    color: #FFF !important; 
+}
+
+.custom-header{
+    display: flex;
+    justify-content: center;
+}
+
+.header-logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header-logo img{
+    width: 60px;
+    height: 30px;
+}
+
+.header-logo h1{
+    color: #FF6A18;
+    font-family: "League Spartan";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0;
+    padding-left: 10px;
+    padding-right: 15px;
+}
+
+.sidebar-content a{
+    font-size: 16px !important;
+    font-weight: 300 !important;
+    color: #FFF !important;
+    display: block !important;
+}
+
+.divider {
+    display: flex !important;
+    align-self: center !important; /* Ensure the divider is centered */
+    height: .04px !important;
+    width: 100% !important;
+    background-color: #FF6A18 !important; /* Adjust color and transparency as needed */
+}
+
+
+.sidebar-content-footer a{
+    text-decoration: none !important;
+    font-weight: 300 !important;
+    color: #FFF !important;
+}
+
+.fvWJS .activeClicked > li{
+    background: #FF6A18 !important;
+    color: #FFF !important;
+    width: 300px !important;
+    margin: 0;
+}
+
+.jGeaPm{
+    border-bottom: .01px solid #FF6A18 !important;
+}

@@ -1,10 +1,12 @@
 
 import { Form, Button, Alert, Modal, Container } from 'react-bootstrap';
 
+import './Dashboard.css'
+
 function Dashboard() {
     return (
       <div className="Dashboard">
-        <Button variant="primary">This is Dashboard</Button>
+        <div>This is Dashboard</div>
       </div>
     );
   }
