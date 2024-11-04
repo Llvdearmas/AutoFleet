@@ -1,0 +1,89 @@
+.Dashboard{
+    margin: 10px;
+    width: 100%;
+    background-color: #FFFAF7;
+}
+
+.header-dashboard{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-button{
+    display: flex;
+    align-items: center;
+}
+
+.header-row h1{
+    color: #FF8C4C !important;
+    margin: 0;
+    font-family: 'Poppins';
+}
+
+.header-row p{
+    color: #FF8C4C !important;
+    margin: 0;
+}
+
+.notif-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #023047;
+    color: #fff;
+    font-size: 1.2rem;
+    border: none;
+    margin-right: 10px;
+}
+
+.notif-button:hover{
+    background-color: #05202e;
+    color: #fff;
+}
+
+.search-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #023047; 
+    color: #fff;
+    font-size: 1.2rem;
+    border: none;
+    margin-right: 10px;
+}
+
+.search-button:hover{
+    background-color: #05202e;
+    color: #fff;
+}
+
+.user-button {
+    height: 50px;
+    border-radius: 50px;
+    background-color: #FF6A18;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-button:hover{
+    background-color: #05202e;
+    color: #fff;
+}
+
+.user-icon{
+    background-color: #fff;
+    border-radius: 50%;
+    color: #FF8C4C;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+}

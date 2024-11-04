@@ -1,0 +1,89 @@
+.Maptracking {
+    padding: 20px;
+    background-color: #fffaf7;
+}
+
+.title-text {
+    color: #ff6a18;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.main-content {
+    background-color: #fffaf7; 
+    padding: 20px;
+    border-radius: 10px; 
+}
+
+.subtitle-text {
+    color: #ff6a18;
+    font-size: 1.1em;
+    margin: 0;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.icon-button {
+    border: none;
+    background: transparent;
+    margin: 0 5px;
+    color: #6c757d;
+}
+
+.icon-circle {
+    background-color: #023047;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.profile-section {
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: #ff6a18;
+    font-weight: 500;
+    color: #f1f3f5;
+}
+
+.user-icon {
+    color: #f1f3f5;
+}
+
+.divider {
+    border-top: solid #ff6a18;
+    margin: 10px 0;
+    color: #ff6a18;
+}
+
+.search-box {
+    padding: 10px;
+    background-color: #f8f9fa;
+}
+
+.search-icon {
+    background-color: #ffffff;
+    border: none;
+    color: #6c757d;
+}
+
+.map-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.trip-card {
+    background-color: #f8f9fa; 
+    border: 1px solid #dee2e6; 
+}
+
+.location-info p {
+    margin: 0;
+    color: #6c757d; 
+}
