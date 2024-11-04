@@ -72,12 +72,12 @@ const router =createBrowserRouter(
       <Route
         path="maptracking"
         element={
-          <RequireAuth>
+         
               <div className='web-container'>
                 <Sidebar/>
                 <Maptracking/>
               </div>
-          </RequireAuth>
+          
         }
       />
 
