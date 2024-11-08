@@ -1,5 +1,5 @@
 .Dashboard{
-    margin: 10px;
+    margin: 20px;
     width: 100%;
     background-color: #FFFAF7;
 }
@@ -86,4 +86,256 @@
     margin-right: 10px;
     width: 30px;
     height: 30px;
+}
+
+.dashboard-content{
+    margin-top: 20px;
+}
+
+.left-content{
+    padding: 0;
+}
+
+.right-content{
+    padding: 0;
+}
+
+.dashboard-total{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-right: 10px;
+}
+
+.total-car{
+    flex: 1;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 40px 6px rgba(0, 0, 0, 0.02);
+}
+
+.total-car-custom {
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+    justify-content: space-between;
+}
+  
+
+
+.total-car h4{
+    color: #A2A2A2;
+    font-family: Poppins;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+}
+
+.total-car p{
+    color: #012A4A;
+    font-family: Poppins;
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 600;
+    margin: 0;
+}
+
+.dashboard-crashreport{
+    background-color: #fff;
+    margin: 0;
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 40px 6px rgba(0, 0, 0, 0.02);
+}
+
+.dashboard-crashreport h4{
+    color: #A2A2A2;
+    font-family: Poppins;
+    font-size: 1.1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+}
+
+.time{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time h4{
+    color: #A2A2A2;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.time p{
+    margin: 0;
+    color: #A2A2A2;
+    text-align: center;
+    font-family: Poppins;
+    font-size: .8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.driver{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.driver h4{
+    color: #A2A2A2;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.driver p{
+    margin: 0;
+    color: #A2A2A2;
+    text-align: center;
+    font-family: Poppins;
+    font-size: .8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.open-btn{
+    display: flex;
+    justify-content: center;
+}
+
+.open-btn-custom{
+    border-radius: 50px;
+    background: #094985;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.fleet-status{
+    background-color: #fff;
+    margin: 0;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 40px 6px rgba(0, 0, 0, 0.02);
+    padding: 10px;
+}
+
+.fleet-status h4{
+    color: #A2A2A2;
+    font-family: Poppins;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+}
+
+.pie-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.location-overview{
+    background-color: #fff;
+    margin: 0;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    box-shadow: 0px 4px 40px 6px rgba(0, 0, 0, 0.02);
+    padding: 10px;
+}
+
+.location-overview h4{
+    color: #A2A2A2;
+    font-family: Poppins;
+    font-size: 1.1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.location-overview-custom{
+    height: 400px;
+    padding-bottom: 10px;
+}
+
+.table tr{
+    border-bottom: #fff;
+}
+
+.upcoming-trips{
+    background-color: #fff;
+    margin: 0;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 40px 6px rgba(0, 0, 0, 0.02);
+    padding: 10px;
+}
+
+.upcoming-trips h4{
+    color: #A2A2A2;
+    font-family: Poppins;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    padding-top: 10px;
+}
+
+.upcoming-trips-table{
+    margin-top: 20px;
+}
+
+.upcoming-trips-custom-table {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.about h4{
+    color: #A6A6A6;
+    font-family: Poppins;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.about p{
+    color: #A6A6A6;
+    font-family: Poppins;
+    font-size: 1.1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+}
+
+.status .btn{
+    border-radius: 50px;
+    background: #094985;
+    border: 0;
+    padding-left: 15px;
+    padding-right: 15px;
 }
