@@ -54,10 +54,13 @@ const Sidebar = () => {
                         <CDBSidebarMenuItem icon="car">Vehicles</CDBSidebarMenuItem>
                     </NavLink>
                     <NavLink exact to="/drivers" className={({ isActive }) => (isActive ? "activeClicked" : "")}>
-                        <CDBSidebarMenuItem icon="user">Drivers</CDBSidebarMenuItem>
+                        <CDBSidebarMenuItem icon="calendar">Rent</CDBSidebarMenuItem>
                     </NavLink>
                     <NavLink exact to="/maptracking" className={({ isActive }) => (isActive ? "activeClicked" : "")}>
                         <CDBSidebarMenuItem icon="map">Map Tracking</CDBSidebarMenuItem>
+                    </NavLink>
+                    <NavLink exact to="/maintenance" className={({ isActive }) => (isActive ? "activeClicked" : "")}>
+                        <CDBSidebarMenuItem icon="wrench">Maintenance</CDBSidebarMenuItem>
                     </NavLink>
                     <NavLink exact to="/settings" className={({ isActive }) => (isActive ? "activeClicked" : "")}>
                         <CDBSidebarMenuItem icon="cog">Settings</CDBSidebarMenuItem>
