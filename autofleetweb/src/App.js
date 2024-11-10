@@ -27,12 +27,7 @@ import Settings from './admin/Settings/Settings.js';
 const router =createBrowserRouter(
   createRoutesFromElements(
     <Route path = "/"  >
-      <Route index element={
-        <div className='web-container'>
-          <Sidebar/>
-          <Drivers/>
-        </div>
-        }></Route>
+      <Route index element={<Login />}></Route>
       <Route 
         path = "login" 
         element={<Login />}>
