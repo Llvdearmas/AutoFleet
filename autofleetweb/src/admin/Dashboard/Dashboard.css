@@ -19,6 +19,9 @@
     margin: 0;
     font-family: 'Poppins';
 }
+.header-row{
+    flex-direction: column;
+}
 
 .header-row p{
     color: #FF8C4C !important;
