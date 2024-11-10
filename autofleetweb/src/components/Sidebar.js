@@ -24,11 +24,11 @@ const Sidebar = () => {
 
     const handleLogout = async () => {
         try {
-        await logout(); // Logout the user
-        navigate('/login'); // Redirect to login page after logout
+            await logout(); // Logout the user
+            navigate('/login'); // Redirect to login page after logout
         } catch (error) {
-        console.error('Logout error:', error);
-        // Handle any logout error if needed
+            console.error('Logout error:', error);
+            // Handle any logout error if needed
         }
     };
 
@@ -72,10 +72,15 @@ const Sidebar = () => {
         
                 <CDBSidebarFooter className='sidebar-content-footer'>
                     <div className='sidebar-footer'>
-                        <div className="divider"></div> 
-                        <NavLink exact to="/logout" activeClassName="activeClicked">
-                            <CDBSidebarMenuItem icon="door-open" className='custom-footer' onClick={handleLogout}>Logout</CDBSidebarMenuItem>
-                        </NavLink>
+                        <div className="divider"></div>
+                        {/* Remove NavLink and use a regular click handler for logout */}
+                        <CDBSidebarMenuItem
+                            icon="door-open"
+                            className='custom-footer'
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </CDBSidebarMenuItem>
                     </div>
                 </CDBSidebarFooter>
             </CDBSidebar>
