@@ -47,6 +47,7 @@ const Login = () => {
             // Check the role and navigate accordingly
             if (data.role === 'admin') {
                 login({ email: data.Email, role: data.Role }); // Save user data in context
+                alert('Login Successful.')
                 navigate('/dashboard'); // Navigate to dashboard for admin
             } else {
                 setError('You do not have access to this application.'); // Set error for non-admin roles
