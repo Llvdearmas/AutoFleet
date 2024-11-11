@@ -1,3 +1,5 @@
+import React, { useContext, useEffect, useState } from 'react';
+
 import { Form, Button, Alert, Modal, Container, Row, Col, Table } from 'react-bootstrap';
 
 import './Dashboard.css'
@@ -7,11 +9,19 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'; // Imp
 import { Pie } from 'react-chartjs-2';
 import user from './../../img/user.png';
 
+import { AuthContext } from './../../settings/AuthContext.js';
+import { useNavigate } from 'react-router-dom';
+
+
 ChartJS.register(ArcElement, Tooltip, Legend); 
 
 
 
+
 function Dashboard() {
+  const { user, adminDetails, setAdminDetails } = useContext(AuthContext); // Access user and setAdminDetails from context
+  const [error, setError] = useState(null); // For error handling
+
   const fleetstatusdata = {
     labels: ['On The Road', 'Damaged', 'Inactive'],
     datasets: [
@@ -38,12 +48,37 @@ function Dashboard() {
     maintainAspectRatio: false, // Allows for better control over sizing
   };
 
+  // Fetch admin details based on user id
+  useEffect(() => {
+    const fetchAdminDetails = async () => {
+      try {
+        const adminResponse = await fetch(`https://localhost:7192/api/users/get-admin-details?userId=${user.user_id}`);
+        if (adminResponse.ok) {
+          const adminData = await adminResponse.json();
+          setAdminDetails({ fname: adminData.FirstName, lname: adminData.LastName });
+        } else {
+          setError('Failed to fetch admin details.');
+        }
+      } catch (error) {
+        setError('Error fetching admin details: ' + error.message);
+      }
+    };
+
+    if (user?.user_id) {
+      fetchAdminDetails();
+    }
+  }, [user, setAdminDetails]); // Re-run when user or setAdminDetails changes
+
+  console.log(adminDetails);
+
+  console.log(user);
+
   return (
     <div className="Dashboard">
       <div className='header-dashboard'>
         <div className='header-row'>
           <h1>DASHBOARD</h1>
-          <p>Welcome Back, Christy!</p>
+          <p>Welcome Back, {user?.email}</p>
         </div>
         <div className='header-button'>
           <Button className='notif-button'><FaBell /></Button>
@@ -73,13 +108,13 @@ function Dashboard() {
               </Col>
               <Col xs={6} sm={6} md={6} lg={3} className="total-car undermaintenance">
                 <div className='total-car-custom'>
-                  <h4>UNDER MAINTENANCE</h4>
+                  <h4>RENTED</h4>
                   <p>56</p>
                 </div>
               </Col>
               <Col xs={6} sm={6} md={6} lg={3} className="total-car undermonitoring">
                 <div className='total-car-custom'>
-                  <h4>UNDER MONITORING</h4>
+                  <h4>UNDER MAINTENANCE</h4>
                   <p>56</p>
                 </div>
               </Col>
