@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
     const [adminDetails, setAdminDetails] = useState(() => {
         const savedAdmin = localStorage.getItem('authAdmin');
-        return savedAdmin ? JSON.parse(savedAdmin) : { fname: "", lname: "" };
+        return savedAdmin ? JSON.parse(savedAdmin) : null;
     });
 
 
