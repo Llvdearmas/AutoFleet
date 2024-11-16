@@ -6,6 +6,13 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 const Drivers = () => {
   const [selectedDriver, setSelectedDriver] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showAddVehicleModal, setShowAddVehicleModal] = useState(false);
+  const [showAccountModal, setShowAccountModal] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
   
   const drivers = [
     {
@@ -46,9 +53,48 @@ const Drivers = () => {
         '/api/placeholder/400/300'
       ]
     },
-  
+    {
+      id: 3,
+      status: 'ONGOING',
+      name: 'JOSE DEVERA',
+      carModel: 'Toyota Hiace',
+      contactNumber: '09123-456-789',
+      email: 'JuanDC@Gmail.com',
+      address: '123 Herbosa St.',
+      emergencyContact: '09123-456-789',
+      pickupLocation: '123 Herbosa St.',
+      pickupDate: '11/09/2024',
+      pickupTime: '11:00AM',
+      dropoffLocation: '123 Herbosa St.',
+      dropoffDate: '11/09/2024',
+      dropoffTime: '11:00AM',
+      photos: [
+        '/api/placeholder/400/300'
+      ]
+    },
   ];
-  const [showModal, setShowModal] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmitAccount = (e) => {
+    e.preventDefault();
+    // Add account creation logic here
+    console.log('Account creation form submitted:', formData);
+    setShowAccountModal(false);
+    // Reset form
+    setFormData({
+      email: '',
+      password: '',
+      confirmPassword: ''
+    });
+  };
+
   const filteredDrivers = drivers.filter(driver =>
     driver.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     driver.carModel.toLowerCase().includes(searchQuery.toLowerCase())
@@ -64,27 +110,26 @@ const Drivers = () => {
             <p className="welcome-text">Welcome Back, John!</p>
           </div>
           <div className="header-actions">
-          <div className="icon-container">
-            <div className="notification-container">
+            <div className="icon-container">
+              <div className="notification-container">
                 <i className="fas fa-bell notification-icon"></i>
-            </div>
-            <div className="search2-container">
+              </div>
+              <div className="search2-container">
                 <i className="fas fa-search search2-icon"></i>
+              </div>
             </div>
+            <div className="admin-dropdown">
+              <img 
+                className="admin-avatar" 
+                src="https://via.placeholder.com/30" 
+                alt="Avatar" 
+              />
+              <div className="admin-info">
+                <span className="admin-name">John Dalisay</span>
+                <span className="admin-label">Admin</span>
+              </div>
+              <span className="dropdown-arrow">▼</span>
             </div>
-               <div className="admin-dropdown">
-                <img 
-                    className="admin-avatar" 
-                    src="https://via.placeholder.com/30" 
-                    alt="Avatar" 
-                />
-                <div className="admin-info">
-                    <span className="admin-name">John Dalisay</span>
-                    <span className="admin-label">Admin</span>
-                </div>
-                <span className="dropdown-arrow">▼</span>
-            </div>
-                
           </div>
         </div>
       </header>
@@ -95,7 +140,7 @@ const Drivers = () => {
           {/* Left Panel - Driver List */}
           <div className="driver-list">
             <div className="search-container">
-            <i className="fas fa-search search-icon"></i>
+              <i className="fas fa-search search-icon"></i>
               <input
                 type="text"
                 placeholder="Search Files"
@@ -106,12 +151,12 @@ const Drivers = () => {
             </div>
 
             <div className="add-schedule-container">
-            <button 
-             className="add-schedule-btn" 
-              onClick={() => setShowModal(true)} // Open the modal when clicked
-                 >
-            Add Schedule
-               </button>
+              <button 
+                className="add-schedule-btn" 
+                onClick={() => setShowAddVehicleModal(true)}
+              >
+                Add Schedule
+              </button>
             </div>
 
             <div className="drivers-grid">
@@ -122,7 +167,7 @@ const Drivers = () => {
                   onClick={() => setSelectedDriver(driver)}
                 >
                   <div className="driver-info">
-                  <img className="avatar" src="https://via.placeholder.com/50" alt="" />
+                    <img className="avatar" src="https://via.placeholder.com/50" alt="" />
                     <div>
                       <div className="drivers-name">{driver.name}</div>
                       <div className="driver-car">{driver.carModel}</div>
@@ -145,7 +190,7 @@ const Drivers = () => {
                 <div className="reg-number">Car to be Rented: {selectedDriver.carModel}</div>
 
                 <div className="details-content">
-                 {selectedDriver.contactNumber && (
+                  {selectedDriver.contactNumber && (
                     <div className="info-section">
                       <div>Contact Number: {selectedDriver.contactNumber}</div>
                       <div>Email: {selectedDriver.email}</div>
@@ -165,21 +210,20 @@ const Drivers = () => {
                     </div>
                   )}
 
-                 
                   {selectedDriver.photos && (
                     <div className="photos-section">
-                    <div className="photos-header">GOVERNMENT-ISSUED ID</div>
-                    <div className="photos-grid">
-                      {selectedDriver.photos.map((photo, index) => (
-                        <img
-                          key={index}
-                          src={photo || "https://via.placeholder.com/400x300"} // Placeholder image
-                          alt={`GOV ID`}
-                          className="id-photo"
-                        />
-                      ))}
+                      <div className="photos-header">GOVERNMENT-ISSUED ID</div>
+                      <div className="photos-grid">
+                        {selectedDriver.photos.map((photo, index) => (
+                          <img
+                            key={index}
+                            src={photo || "https://via.placeholder.com/400x300"}
+                            alt={`GOV ID`}
+                            className="id-photo"
+                          />
+                        ))}
+                      </div>
                     </div>
-                  </div>
                   )}
                 </div>
               </div>
@@ -188,142 +232,211 @@ const Drivers = () => {
         </div>
       </main>
 
+      {/* Add Vehicle Modal */}
       <Modal
-  show={showModal}
-  onHide={() => setShowModal(false)}
-  size="lg"
-  dialogClassName="custom-modal"
->
-  <Modal.Header closeButton>
-    <Modal.Title className="text w-100" style={{ fontWeight: 'bold', color: '#f76d20' }}>
-      ADD VEHICLE
-    </Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    {/* Renter Details */}
-    <h6 style={{ color: '#003399', fontWeight: 'bold', marginBottom: '10px' }}>RENTER DETAILS</h6>
-    <Form>
-      <div className="row">
-        <Form.Group className="col-md-4">
-          <Form.Label>First Name</Form.Label>
-          <Form.Control size="sm" type="text" placeholder="Enter first name" />
-        </Form.Group>
-        <Form.Group className="col-md-4">
-          <Form.Label>Middle Name</Form.Label>
-          <Form.Control size="sm" type="text" placeholder="Enter middle name" />
-        </Form.Group>
-        <Form.Group className="col-md-4">
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control size="sm" type="text" placeholder="Enter last name" />
-        </Form.Group>
-      </div>
-      <div className="row">
-        <Form.Group className="col-md-6">
-          <Form.Label>Birthday</Form.Label>
-          <Form.Control size="sm" type="date" />
-        </Form.Group>
-        <Form.Group className="col-md-6">
-          <Form.Label>Email</Form.Label>
-          <Form.Control size="sm" type="email" placeholder="Enter email" />
-        </Form.Group>
-      </div>
-      <div className="row">
-        <Form.Group className="col-md-6">
-          <Form.Label>Contact Number</Form.Label>
-          <Form.Control size="sm" type="text" placeholder="Enter contact number" />
-        </Form.Group>
-        <Form.Group className="col-md-6">
-          <Form.Label>Emergency Contact</Form.Label>
-          <Form.Control size="sm" type="text" placeholder="Enter emergency contact" />
-        </Form.Group>
-      </div>
-      <div className="row">
-        <Form.Group className="col-md-12">
-          <Form.Label>Address</Form.Label>
-          <Form.Control size="sm" type="text" placeholder="Enter address" />
-        </Form.Group>
-      </div>
-      <div className="row">
-        <Form.Group className="col-md-12">
-          <Form.Label>Upload ID</Form.Label>
-          <Form.Control size="sm" type="file" />
-        </Form.Group>
-      </div>
-    </Form>
+        show={showAddVehicleModal}
+        onHide={() => setShowAddVehicleModal(false)}
+        size="lg"
+        dialogClassName="custom-modal"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title className="text w-100" style={{ fontWeight: 'bold', color: '#f76d20' }}>
+            ADD VEHICLE
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* Renter Details */}
+          <h6 style={{ color: '#003399', fontWeight: 'bold', marginBottom: '10px' }}>RENTER DETAILS</h6>
+          <Form>
+            <div className="row">
+              <Form.Group className="col-md-4">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control size="sm" type="text" placeholder="Enter first name" />
+              </Form.Group>
+              <Form.Group className="col-md-4">
+                <Form.Label>Middle Name</Form.Label>
+                <Form.Control size="sm" type="text" placeholder="Enter middle name" />
+              </Form.Group>
+              <Form.Group className="col-md-4">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control size="sm" type="text" placeholder="Enter last name" />
+              </Form.Group>
+            </div>
+            <div className="row">
+              <Form.Group className="col-md-6">
+                <Form.Label>Birthday</Form.Label>
+                <Form.Control size="sm" type="date" />
+              </Form.Group>
+              <Form.Group className="col-md-6">
+                <Form.Label>Email</Form.Label>
+                <Form.Control size="sm" type="email" placeholder="Enter email" />
+              </Form.Group>
+            </div>
+            <div className="row">
+              <Form.Group className="col-md-6">
+                <Form.Label>Contact Number</Form.Label>
+                <Form.Control size="sm" type="text" placeholder="Enter contact number" />
+              </Form.Group>
+              <Form.Group className="col-md-6">
+                <Form.Label>Emergency Contact</Form.Label>
+                <Form.Control size="sm" type="text" placeholder="Enter emergency contact" />
+              </Form.Group>
+            </div>
+            <div className="row">
+              <Form.Group className="col-md-12">
+                <Form.Label>Address</Form.Label>
+                <Form.Control size="sm" type="text" placeholder="Enter address" />
+              </Form.Group>
+            </div>
+            <div className="row">
+              <Form.Group className="col-md-12">
+                <Form.Label>Upload ID</Form.Label>
+                <Form.Control size="sm" type="file" />
+              </Form.Group>
+            </div>
+          </Form>
 
-    {/* Rent Details */}
-    <h6 style={{ color: '#003399', fontWeight: 'bold', marginTop: '15px', marginBottom: '10px' }}>
-      RENT DETAILS
-    </h6>
-    <Form>
-      <div className="row">
-        <Form.Group className="col-md-6">
-          <Form.Label>Pick Up Location</Form.Label>
-          <Form.Control size="sm" type="text" placeholder="Enter pick-up location" />
-        </Form.Group>
-        <Form.Group className="col-md-6">
-          <Form.Label>Drop Off Location</Form.Label>
-          <Form.Control size="sm" type="text" placeholder="Enter drop-off location" />
-        </Form.Group>
-      </div>
-      <div className="row">
-        <Form.Group className="col-md-3">
-          <Form.Label>Start Date of Rent</Form.Label>
-          <Form.Control size="sm" type="date" />
-        </Form.Group>
-        <Form.Group className="col-md-3">
-          <Form.Label>Start Time of Rent</Form.Label>
-          <Form.Control size="sm" type="time" />
-        </Form.Group>
-        <Form.Group className="col-md-3">
-          <Form.Label>End Date of Rent</Form.Label>
-          <Form.Control size="sm" type="date" />
-        </Form.Group>
-        <Form.Group className="col-md-3">
-          <Form.Label>End Time of Rent</Form.Label>
-          <Form.Control size="sm" type="time" />
-        </Form.Group>
-      </div>
-    </Form>
+          {/* Rent Details */}
+          <h6 style={{ color: '#003399', fontWeight: 'bold', marginTop: '15px', marginBottom: '10px' }}>
+            RENT DETAILS
+          </h6>
+          <Form>
+            <div className="row">
+              <Form.Group className="col-md-6">
+                <Form.Label>Pick Up Location</Form.Label>
+                <Form.Control size="sm" type="text" placeholder="Enter pick-up location" />
+              </Form.Group>
+              <Form.Group className="col-md-6">
+                <Form.Label>Drop Off Location</Form.Label>
+                <Form.Control size="sm" type="text" placeholder="Enter drop-off location" />
+              </Form.Group>
+            </div>
+            <div className="row">
+              <Form.Group className="col-md-3">
+                <Form.Label>Start Date of Rent</Form.Label>
+                <Form.Control size="sm" type="date" />
+              </Form.Group>
+              <Form.Group className="col-md-3">
+                <Form.Label>Start Time of Rent</Form.Label>
+                <Form.Control size="sm" type="time" />
+              </Form.Group>
+              <Form.Group className="col-md-3">
+                <Form.Label>End Date of Rent</Form.Label>
+                <Form.Control size="sm" type="date" />
+              </Form.Group>
+              <Form.Group className="col-md-3">
+                <Form.Label>End Time of Rent</Form.Label>
+                <Form.Control size="sm" type="time" />
+              </Form.Group>
+            </div>
+          </Form>
 
-    {/* Vehicle Details */}
-    <h6 style={{ color: '#003399', fontWeight: 'bold', marginTop: '15px', marginBottom: '10px' }}>
-      VEHICLE DETAILS
-    </h6>
-    <Form>
-      <div className="row">
-        <Form.Group className="col-md-6">
-          <Form.Label>Car to be Rented</Form.Label>
-          <Form.Control size="sm" type="text" placeholder="Enter car name/model" />
-        </Form.Group>
-        <Form.Group className="col-md-6">
-          <Form.Label>Plate Number</Form.Label>
-          <Form.Control size="sm" type="text" placeholder="Enter plate number" />
-        </Form.Group>
-      </div>
-    </Form>
-  </Modal.Body>
-  <Modal.Footer className="justify-content-center">
-    <Button
-      variant="primary"
-      style={{
-        backgroundColor: '#003399',
-        borderColor: '#003399',
-        padding: '5px 15px',
-      }}
-      onClick={() => {
-        /* Handle form submission */
-      }}
-    >
-      Next
-    </Button>
-  </Modal.Footer>
-</Modal>
+          {/* Vehicle Details */}
+          <h6 style={{ color: '#003399', fontWeight: 'bold', marginTop: '15px', marginBottom: '10px' }}>
+            VEHICLE DETAILS
+          </h6>
+          <Form>
+            <div className="row">
+              <Form.Group className="col-md-6">
+                <Form.Label>Car to be Rented</Form.Label>
+                <Form.Control size="sm" type="text" placeholder="Enter car name/model" />
+              </Form.Group>
+              <Form.Group className="col-md-6">
+                <Form.Label>Plate Number</Form.Label>
+                <Form.Control size="sm" type="text" placeholder="Enter plate number" />
+              </Form.Group>
+            </div>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer className="justify-content-center">
+          <Button
+            variant="primary"
+            style={{
+              backgroundColor: '#003399',
+              borderColor: '#003399',
+              padding: '5px 15px',
+            }}
+            onClick={() => {
+              setShowAddVehicleModal(false);
+              setShowAccountModal(true);
+            }}
+          >
+            Next
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
+      {/* Create Renter Account Modal */}
+      <Modal
+        show={showAccountModal}
+        onHide={() => setShowAccountModal(false)}
+        size="md"
+        dialogClassName="custom-modal"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title className="w-100 text-center" style={{ color: '#f76d20', fontWeight: 'bold' }}>
+            CREATE A RENTER'S ACCOUNT
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmitAccount}>
+            <Form.Group className="mb-4">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                placeholder="Enter email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+            </Form.Group>
 
+            <Form.Group className="mb-4">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                value={formData.password}
+                onChange={handleInputChange}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-4">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm password"
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+                required
+              />
+            </Form.Group>
+
+            <div className="d-flex justify-content-center">
+              <Button
+                type="submit"
+                style={{
+                  backgroundColor: '#003399',
+                  borderColor: '#003399',
+                  padding: '8px 40px',width: '100%',
+                  maxWidth: '200px',
+                  borderRadius: '5px',
+                  fontWeight: 'bold'
+                }}
+              >
+                Submit
+              </Button>
+            </div>
+          </Form>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
-
 
 export default Drivers;
