@@ -1,19 +1,58 @@
-import { Form, Button, Alert, Modal, Container } from 'react-bootstrap';
-import './Drivers.css'
 import React, { useState } from 'react';
+import { Form, Button, Alert, Modal, Container } from 'react-bootstrap';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import './Drivers.css';
 
 const Drivers = () => {
   const [selectedDriver, setSelectedDriver] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [showAddVehicleModal, setShowAddVehicleModal] = useState(false);
+  const [showCreateAccount, setShowCreateAccount] = useState(false);
   const [showAccountModal, setShowAccountModal] = useState(false);
+  const [email, setEmail] = useState('');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     confirmPassword: ''
   });
-  
+
+  const [errors, setErrors] = useState({});  
+  const [emailTouched, setEmailTouched] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!email) {
+      newErrors.email = 'Email is required';
+    }
+    return newErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setShowCreateAccount(false);
+    setShowAccountModal(true);
+    setEmail('');
+  };
+
+  const handleSubmitAccount = (e) => {
+    e.preventDefault();
+    console.log('Account creation data:', formData);
+    setShowAccountModal(false);
+    setFormData({
+      email: '',
+      password: '',
+      confirmPassword: ''
+    });
+  };
+
   const drivers = [
     {
       id: 1,
@@ -74,27 +113,6 @@ const Drivers = () => {
     },
   ];
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmitAccount = (e) => {
-    e.preventDefault();
-    // Add account creation logic here
-    console.log('Account creation form submitted:', formData);
-    setShowAccountModal(false);
-    // Reset form
-    setFormData({
-      email: '',
-      password: '',
-      confirmPassword: ''
-    });
-  };
-
   const filteredDrivers = drivers.filter(driver =>
     driver.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     driver.carModel.toLowerCase().includes(searchQuery.toLowerCase())
@@ -121,7 +139,7 @@ const Drivers = () => {
             <div className="admin-dropdown">
               <img 
                 className="admin-avatar" 
-                src="https://via.placeholder.com/30" 
+                src="/api/placeholder/30/30" 
                 alt="Avatar" 
               />
               <div className="admin-info">
@@ -167,7 +185,7 @@ const Drivers = () => {
                   onClick={() => setSelectedDriver(driver)}
                 >
                   <div className="driver-info">
-                    <img className="avatar" src="https://via.placeholder.com/50" alt="" />
+                    <img className="avatar" src="/api/placeholder/50/50" alt="" />
                     <div>
                       <div className="drivers-name">{driver.name}</div>
                       <div className="driver-car">{driver.carModel}</div>
@@ -217,7 +235,7 @@ const Drivers = () => {
                         {selectedDriver.photos.map((photo, index) => (
                           <img
                             key={index}
-                            src={photo || "https://via.placeholder.com/400x300"}
+                            src={photo}
                             alt={`GOV ID`}
                             className="id-photo"
                           />
@@ -358,7 +376,7 @@ const Drivers = () => {
             }}
             onClick={() => {
               setShowAddVehicleModal(false);
-              setShowAccountModal(true);
+              setShowCreateAccount(true);
             }}
           >
             Next
@@ -366,8 +384,92 @@ const Drivers = () => {
         </Modal.Footer>
       </Modal>
 
-      {/* Create Renter Account Modal */}
-      <Modal
+     {/* Simple Create Account Modal */}
+<Modal
+  show={showCreateAccount}
+  onHide={() => setShowCreateAccount(false)}
+  size="md"
+  centered
+  className="simple-account-modal"
+>
+  <Modal.Header closeButton>
+    <Modal.Title
+      className="w-100"
+      style={{
+        color: '#f76d20',
+        fontSize: '24px',
+        fontWeight: 'bold',
+      }}
+    >
+      INPUT YOUR EMAIL ADDRESS
+    </Modal.Title>
+  </Modal.Header>
+  <Modal.Body className="px-4 py-3">
+    <Form noValidate>
+      <Form.Group className="mb-4">
+        <Form.Label style={{ color: '#000', marginBottom: '8px' }}>Email</Form.Label>
+        <Form.Control
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter email"
+          style={{
+            border: 'none',
+            borderBottom: '1px solid #ced4da',
+            borderRadius: '0',
+            padding: '8px 0',
+            boxShadow: 'none',
+          }}
+          isInvalid={!email && emailTouched} // Mark invalid if touched and empty
+        />
+        <Form.Control.Feedback type="invalid">
+          Email is required.
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <div className="d-flex flex-column align-items-center">
+        <Button
+          className="w-100 mb-3"
+          variant="dark"
+          style={{
+            backgroundColor: '#003399',
+            border: 'none',
+            borderRadius: '4px',
+            padding: '10px',
+          }}
+          onClick={() => {
+            if (!email) {
+              setEmailTouched(true); 
+              return; 
+            }
+            setShowCreateAccount(false);
+          }}
+        >
+          Submit
+        </Button>
+
+        <span
+          style={{
+            color: '#003399',
+            textDecoration: 'underline',
+            cursor: 'pointer',
+          }}
+          onClick={() => {
+            setShowCreateAccount(false);
+            setShowAccountModal(true);
+          }}
+        >
+          Create an account
+        </span>
+      </div>
+    </Form>
+  </Modal.Body>
+</Modal>
+
+
+
+       {/* Create Renter Account Modal */}
+       <Modal
         show={showAccountModal}
         onHide={() => setShowAccountModal(false)}
         size="md"
