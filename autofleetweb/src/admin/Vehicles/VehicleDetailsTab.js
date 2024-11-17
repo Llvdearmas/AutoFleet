@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import './VehicleDetails.css';
+import './VehicleDetailsTab.css';
 import FuelConsumptionTab from './FuelConsumptionTab';
+import MaintenanceOthersTab from './MaintenanceOthersTab';
 
-const VehicleDetails = ({ vehicle, onClose }) => {
+const VehicleDetailsTab = ({ vehicle, onClose }) => {
   const [activeTab, setActiveTab] = useState('details');
 
   if (!vehicle) return null;
 
   const renderContent = () => {
     switch (activeTab) {
+      case 'maintenance':
+        return <MaintenanceOthersTab />;
       case 'fuel':
         return <FuelConsumptionTab />;
       case 'details':
@@ -77,4 +80,4 @@ const VehicleDetails = ({ vehicle, onClose }) => {
   );
 };
 
-export default VehicleDetails;
+export default VehicleDetailsTab;

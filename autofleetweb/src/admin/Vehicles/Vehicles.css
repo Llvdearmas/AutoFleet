@@ -1,25 +1,47 @@
 /* src/admin/Vehicles/Vehicles.css */
 
 .vehicles-container {
-  padding: 20px;
-  background-color: #ffffff;
+  background-color: #FFFAF7;
+  padding: 1.5rem 2rem;
+  width: 100%;
 }
 
 .top-ribbon {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column; /* Aligns vehicle-header and <p> vertically */
+  align-items: flex-start; /* Left aligns the text */
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column; /* Stacks the text vertically */
+}
+
+.right-side {
+  display: flex;
+  align-items: center;
   gap: 10px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #ff6a18; 
 }
 
 .vehicle-header {
-  background-color: #ffffff; 
   color: #ff6a18; 
 }
 
+.vehicle-header p {
+  margin: 0;
+}
+
 .vehicle-header h2 {
+  font-weight: bold;
+  font-size: 2rem;
   margin: 0;
 }
 
@@ -27,16 +49,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #fff;
+  padding: 1.5rem 2rem;
   margin-bottom: 20px;
+  border-radius: 10px;
 }
 
 .list-header {
-  font-size: 20px;
   font-weight: normal;
   color: #a2a2a2;
   margin: 0;
 }
-
 
 .action-buttons {
   display: flex;
@@ -65,7 +88,7 @@
 
 /* Table Styling */
 .table-container {
-  background-color: #f8f9fa;
+  background-color: #fff;
   padding: 20px;
   border-radius: 10px;
 }
@@ -78,13 +101,13 @@ table {
 th,
 td {
   padding: 12px;
-  text-align: left;
+  text-align: center;
   font-size: 14px;
   color: #a2a2a2;
 }
 
 th {
-  background-color: #efefef;
+  border-bottom: #a2a2a2 1px solid;
   font-weight: bold;
 }
 
@@ -131,4 +154,32 @@ th {
 
 .pagination button:hover {
   background-color: #ff6a18; 
+}
+
+.action-icons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.action-btn {
+  background-color: transparent;
+  border: none;
+  color: #a2a2a2;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+  transition: color 0.3s;
+}
+
+.action-btn:hover {
+  color: #ff6a18; /* Change icon color on hover */
+}
+
+.vehicle-row {
+  transition: background-color 0.3s ease;
+}
+
+.vehicle-row:hover {
+  background-color:#efefef;
 }

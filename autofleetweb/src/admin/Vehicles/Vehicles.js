@@ -1,9 +1,10 @@
 // src/admin/Vehicles/Vehicles.js
 
 import { Form, Button, Alert, Modal, Container } from 'react-bootstrap';
+import { FaBell, FaSearch, FaUser, FaEdit, FaTrash, FaEye } from 'react-icons/fa';
 import React, { useState } from 'react';
 import './Vehicles.css';
-import VehicleDetails from './VehicleDetails';
+import VehicleDetailsTab from './VehicleDetailsTab';
 
 const Vehicles = () => {
   const [selectedVehicle, setSelectedVehicle] = useState(null);
@@ -52,17 +53,42 @@ const Vehicles = () => {
     setSelectedVehicle(vehicle);
   };
 
-  const closeVehicleDetails = () => {
+  const closeVehicleDetailsTab = () => {
     setSelectedVehicle(null);
+  };
+
+  const handleEdit = (vehicle) => {
+    console.log("Edit vehicle", vehicle);
+  };
+
+  const handleRemove = (vehicle) => {
+    console.log("Remove vehicle", vehicle);
+  };
+
+  const handleView = (vehicle) => {
+    console.log("View vehicle", vehicle);
   };
 
   return (
     <div className="vehicles-container">
       <div className="top-ribbon">
-        <h2 className="vehicle-header">VEHICLES RECORD</h2>
-        <p>Welcome Back, John!</p>
+        <div className="left-side">
+          <div className="vehicle-header">
+            <h2 >VEHICLES RECORD</h2>
+            <p>Welcome Back, Someone!</p>
+          </div>
+        </div>
+        <div className="right-side">
+          <div className='header-button'>
+            <Button className='notif-button'><FaBell /></Button>
+            <Button className='search-button'><FaSearch /></Button>
+            <Button className='user-button'>
+              <div className='user-icon'><FaUser /></div> 
+              Someone else
+            </Button>
+          </div>
+        </div>
       </div>
-
       <div className="header-row">
         <h3 className="list-header">LIST OF VEHICLES</h3>
         <div className="action-buttons">
@@ -80,6 +106,7 @@ const Vehicles = () => {
               <th>Driver</th>
               <th>Car Model</th>
               <th>Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -98,16 +125,26 @@ const Vehicles = () => {
                     {vehicle.status}
                   </span>
                 </td>
+                <td className="actions-icons">
+                  <Button className="action-btn" onClick={() => handleEdit(vehicle)}>
+                    <FaEdit />
+                  </Button>
+                  <Button className="action-btn" onClick={() => handleRemove(vehicle)}>
+                    <FaTrash />
+                  </Button>
+                  <Button className="action-btn" onClick={() => handleView(vehicle)}>
+                    <FaEye />
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-
       {selectedVehicle && (
-        <VehicleDetails
+        <VehicleDetailsTab
           vehicle={selectedVehicle}
-          onClose={closeVehicleDetails}
+          onClose={closeVehicleDetailsTab}
         />
       )}
     </div>
