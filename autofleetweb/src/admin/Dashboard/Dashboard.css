@@ -4,20 +4,21 @@
     background-color: #FFFAF7;
 }
 
-.Dashboard .header-dashboard{
+.header-dashboard{
     display: flex;
     justify-content: space-between;
 }
 
-.Dashboard .header-button{
+.header-button{
     display: flex;
+    align-items: center;
 }
 
-.Dashboard .header-row{
+.header-row{
     display: flex !important;
     flex-direction: column;
     align-items: flex-start !important;
-    margin: 0;
+
 }
 
 .header-row h1{
@@ -286,6 +287,9 @@
     padding-bottom: 10px;
 }
 
+.table tr{
+    border-bottom: #fff;
+}
 
 .upcoming-trips{
     background-color: #fff;
@@ -307,29 +311,16 @@
     padding-top: 10px;
 }
 
-.table tr{
-    border: transparent;
-    margin-bottom: 10px !important;
-}
-
 .upcoming-trips-table{
     margin-top: 20px;
-    border-collapse: separate !important;
-    border-spacing: 0 10px !important;
 }
 
-.upcoming-trips-custom-table tr{
-    margin-bottom: 10px !important; /* Adds gap between rows */
+.upcoming-trips-custom-table {
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
-.upcoming-trips-custom-table td{
-    background-color: #EFEFEF !important;
-    border-radius: 15px;
-    padding: 10px;
-}
-
-
-  
 .about h4{
     color: #A6A6A6;
     font-family: Poppins;
@@ -337,7 +328,6 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    padding: 0 !important;
 }
 
 .about p{
@@ -350,44 +340,10 @@
     margin: 0;
 }
 
-.recent-bookings{
-    background-color: #fff;
-    margin: 0;
-    border-radius: 15px;
-    margin-bottom: 10px;
-    box-shadow: 0px 4px 40px 6px rgba(0, 0, 0, 0.02);
+.status .btn{
+    border-radius: 50px;
+    background: #094985;
+    border: 0;
+    padding-left: 15px;
+    padding-right: 15px;
 }
-
-.recent-bookings h4{
-    color: #A2A2A2;
-    font-family: Poppins;
-    font-size: 1.2rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    margin: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.recent-bookings-table .table thead tr{
-    border: #C6C6C6 !important;
-    border-width: 1px !important;
-}
-
-.recent-bookings-table .table th{
-    color: #A6A6A6;
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-}
-
-.recent-bookings-table .table td{
-    color: #A6A6A6;
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-}
-
