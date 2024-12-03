@@ -7,9 +7,10 @@ import './Vehicles.css';
 
 const Vehicles = () => {
   const {user} = useContext(AuthContext); // Access user and setAdminDetails from context
+  //manages the selected vehicle, modal visibility and mode (add, edit, view)
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [modalMode, setModalMode] = useState('add'); // 'add', 'view', 'edit'
+  const [modalMode, setModalMode] = useState('add'); 
   const [activeTab, setActiveTab] = useState('details');
 
   const handleShow = () => {
@@ -18,12 +19,14 @@ const Vehicles = () => {
     setActiveTab('details');
   };
 
+  //close modal and reset
   const handleClose = () => {
     setShowModal(false);
     setSelectedVehicle(null);
     setActiveTab('details');
   };
 
+//handle row clicks for when user wants to view the vehicle detail
   const handleRowClick = (vehicle) => {
     setSelectedVehicle(vehicle);
     setModalMode('view');
@@ -31,6 +34,7 @@ const Vehicles = () => {
     setActiveTab('details');
   };
 
+//handles vehicle edit function
   const handleEdit = (vehicle) => {
     setSelectedVehicle(vehicle);
     setModalMode('edit');
@@ -38,17 +42,20 @@ const Vehicles = () => {
     setActiveTab('details');
   };
 
+//handles vehicle deletion
   const handleRemove = (vehicle) => {
     console.log("Remove vehicle", vehicle);
   };
 
+//handles viewing function 
   const handleView = (vehicle) => {
     setSelectedVehicle(vehicle);
     setModalMode('view');
     setShowModal(true);
     setActiveTab('details');
   };
-  // sample data, icoconnect ito sa db
+  
+  // sample data, this will be replaced once system is connected to the database
   const vehicles = [
     {
       vehicle_id: '1',
@@ -131,6 +138,7 @@ const Vehicles = () => {
           <div className="vehicle-header">
             <h1>VEHICLES RECORD</h1>
             <p>Welcome Back, {user?.email}</p>
+
           </div>
         </div>
         <div className="right-side">
@@ -139,10 +147,12 @@ const Vehicles = () => {
           <Button className='user-button'>
             <div className='user-icon'><FaUser /></div> 
             Someone else
-          </Button>
+          </Button> 
         </div>
       </div>
-      
+
+    {/* Vehicle header with actions*/}
+
       <div className="header-row">
         <h3 className="list-header">LIST OF VEHICLES</h3>
         <div className="action-buttons">
@@ -152,6 +162,8 @@ const Vehicles = () => {
           </Button>
         </div>
       </div>
+
+     {/*table of vehicle list */}
 
       <div className="table-container">
         <table>
@@ -166,6 +178,9 @@ const Vehicles = () => {
             </tr>
           </thead>
           <tbody>
+        
+          {/*Loops through vehicle arrays to render vehicle details in rows */}
+
             {vehicles.map((vehicle, index) => (
               <tr
                 key={index}
@@ -206,6 +221,8 @@ const Vehicles = () => {
           </tbody>
         </table>
       </div>
+
+     {/* Modal for the add, view, and edit functions */}
 
       <Modal className='modal-vehicle' show={showModal} onHide={handleClose} centered size="lg">
         <Modal.Header closeButton>
@@ -322,6 +339,8 @@ const Vehicles = () => {
                     </>
                   )}
 
+                {/* Modal for the vehicle specs */}
+
                   <Col>
                     <Modal.Title className='modal-vehicle-title'>VEHICLE SPECS</Modal.Title>
                     <Row md={3}>
@@ -386,6 +405,8 @@ const Vehicles = () => {
                 </Form>
               </div>
             </Tab>
+
+                {/* for the additional information about the vehicle */}
 
             <Tab eventKey="additional" title="Additional Details">
               <Form>
@@ -516,7 +537,9 @@ const Vehicles = () => {
             </Tab>
           </Tabs>
         </Modal.Body>
-        
+
+        {/* Modal for save and close  buttons */}
+
         <Modal.Footer>
           <Button variant="secondary" className='modal-vehicle-close' onClick={handleClose}>
             Close
